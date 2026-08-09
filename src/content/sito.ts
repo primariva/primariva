@@ -12,7 +12,7 @@ export const sito = {
   descrittore: 'agenzia digitale romagnola',
   dominio: 'https://altamarea.it',
 
-  title: 'Altamarea — agenzia digitale per locali in Romagna',
+  title: 'Primariva — agenzia digitale per locali in Romagna',
   description:
     'Siti, social e contenuti girati sul posto per bagni, ristoranti, bar e hotel tra Rimini, Cesena e Ravenna. Veniamo a trovarti. Prenota una chiamata.',
   ogTitle: 'Del tuo locale online ce ne occupiamo noi',
@@ -23,7 +23,7 @@ export const sito = {
   /** Numero in formato internazionale senza segni, per il link wa.me. */
   whatsapp: DA_COMPILARE as string,
   /** Come lo scrivi al cliente. */
-  telefonoVisibile: import.meta.env.PUBLIC_FORM_API_KEY,
+  telefonoVisibile: DA_COMPILARE as string,
   /** Come lo mette il link tel:. */
   telefonoLink: DA_COMPILARE as string,
 
