@@ -23,7 +23,7 @@ export const sito = {
   /** Numero in formato internazionale senza segni, per il link wa.me. */
   whatsapp: DA_COMPILARE as string,
   /** Come lo scrivi al cliente. */
-  telefonoVisibile: DA_COMPILARE as string,
+  telefonoVisibile: import.meta.env.PUBLIC_FORM_API_KEY,
   /** Come lo mette il link tel:. */
   telefonoLink: DA_COMPILARE as string,
 
@@ -31,7 +31,7 @@ export const sito = {
   facebook: DA_COMPILARE as string,
 
   /** Chiave pubblica Web3Forms. Si ottiene gratis su web3forms.com. */
-  chiaveForm: import.meta.env.FORM_API_KEY,
+  chiaveForm: import.meta.env.PUBLIC_FORM_API_KEY,
 
   /**
    * Footer. Altamarea è un marchio, non una società: dietro ci sono due

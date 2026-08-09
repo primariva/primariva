@@ -23,7 +23,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         env:
-          FORM_API_KEY: ${{ secrets.FORM_API_KEY }}
+          PUBLIC_FORM_API_KEY: ${{ secrets.PUBLIC_FORM_API_KEY }}
 
 
   deploy:
