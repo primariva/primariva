@@ -5,9 +5,6 @@
  * pubblicazione. Finché contengono il segnaposto, il sito mostra un
  * avviso in fase di sviluppo e i link non vengono resi cliccabili.
  */
-import dotenv from 'dotenv'
-dotenv.config()
-
 export const DA_COMPILARE = '[da compilare]' as const;
 
 export const sito = {
