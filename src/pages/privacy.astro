@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+import { sito, daCompilare } from '../content/sito';
+
+const emailPronta = !daCompilare(sito.email);
+---
+
+<Base
+  title="Informativa privacy — Altamarea"
+  description="Come trattiamo i dati che ci invii dal modulo di contatto."
+  noindex
+>
+  <div class="contenitore py-10">
+    <a href="/" aria-label="Torna alla home"><Logo /></a>
+  </div>
+
+  <article class="contenitore pb-16 max-w-[68ch]">
+    <h1 class="text-[2rem] md:text-[2.5rem]">Informativa privacy</h1>
+    <p class="mt-3 text-fumo text-[0.9375rem]">Ultimo aggiornamento: [data].</p>
+
+    <div
+      class="mt-6 p-4 rounded-lg border-l-4 border-blu bg-white text-[0.9375rem]"
+      role="note"
+    >
+      <strong>Bozza da completare e far validare.</strong> Il testo che segue è
+      una traccia corretta nella struttura, ma i punti fra parentesi quadre
+      vanno compilati e l’insieme va verificato con un consulente prima della
+      pubblicazione. In particolare va risolto il punto sulla contitolarità:
+      con due partite IVA distinte che trattano insieme i dati del modulo, è
+      probabile che siate <strong>contitolari ex art. 26 GDPR</strong>, il che
+      richiede un accordo scritto e l’indicazione di chi fa cosa.
+      Rimuovere questo riquadro dopo la verifica.
+    </div>
+
+    <h2 class="mt-10 text-2xl">Chi tratta i tuoi dati</h2>
+    <p class="mt-3">
+      Altamarea è il marchio con cui operano [Nome e cognome], P.IVA […], e
+      [Nome e cognome], P.IVA […]. Per le richieste inviate tramite questo sito
+      i due professionisti agiscono [titolare autonomo / contitolari del
+      trattamento — da definire]. Puoi scriverci a
+      {emailPronta ? <span> {sito.email}</span> : <span> […]</span>} per
+      qualsiasi domanda su questa informativa.
+    </p>
+
+    <h2 class="mt-8 text-2xl">Quali dati raccogliamo</h2>
+    <p class="mt-3">
+      Solo quelli che ci scrivi nel modulo di contatto: nome, nome dell’attività,
+      un recapito a tua scelta fra telefono ed email, e il testo del messaggio.
+      Non raccogliamo altro e non ti profiliamo.
+    </p>
+
+    <h2 class="mt-8 text-2xl">Perché li trattiamo</h2>
+    <p class="mt-3">
+      Per rispondere alla tua richiesta e, se ne nasce qualcosa, per prepararti
+      un preventivo. La base giuridica è il tuo consenso e l’esecuzione di
+      misure precontrattuali richieste da te (art. 6.1 lett. a e b GDPR).
+    </p>
+
+    <h2 class="mt-8 text-2xl">Per quanto tempo</h2>
+    <p class="mt-3">
+      Conserviamo i messaggi per [12 / 24] mesi dall’ultimo contatto. Se non
+      diventi cliente, dopo quel periodo li cancelliamo. Se lo diventi, la
+      conservazione segue gli obblighi di legge legati al rapporto.
+    </p>
+
+    <h2 class="mt-8 text-2xl">A chi li comunichiamo</h2>
+    <p class="mt-3">
+      Il modulo si appoggia a [nome del servizio di invio], che agisce come
+      responsabile del trattamento, e alla casella email che usiamo per
+      risponderti, fornita da [nome del provider]. Non vendiamo e non cediamo i
+      tuoi dati a nessun altro.
+    </p>
+
+    <h2 class="mt-8 text-2xl">Cookie</h2>
+    <p class="mt-3">
+      Questo sito non usa cookie di profilazione, non ha pixel pubblicitari e
+      non installa strumenti di statistica. Per questo non trovi un banner di
+      consenso: non c’è nulla da consentire. I dettagli sono nella
+      <a href="/cookie-policy" class="text-blu underline underline-offset-2">cookie policy</a>.
+    </p>
+
+    <h2 class="mt-8 text-2xl">I tuoi diritti</h2>
+    <p class="mt-3">
+      Puoi chiederci in qualsiasi momento di accedere ai tuoi dati, correggerli,
+      cancellarli, limitarne il trattamento o riceverli in formato leggibile, e
+      puoi revocare il consenso. Ti basta scriverci. Se ritieni che qualcosa non
+      vada, puoi rivolgerti al Garante per la protezione dei dati personali.
+    </p>
+
+    <p class="mt-10">
+      <a href="/" class="text-blu font-semibold underline underline-offset-4">← Torna alla home</a>
+    </p>
+  </article>
+
+  <Footer />
+</Base>

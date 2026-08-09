@@ -1,0 +1,64 @@
+---
+import Icona from './Icona.astro';
+import { servizi } from '../content/servizi';
+---
+
+<section id="servizi" class="py-16 md:py-24 relative">
+  <div class="contenitore">
+    <div class="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)] gap-10 lg:gap-16">
+      <!-- Intro fissa a sinistra sul desktop: accompagna la lettura della lista. -->
+      <div class="lg:sticky lg:top-24 lg:self-start rivela">
+        <p class="occhiello">Cosa facciamo</p>
+        <h2 class="mt-4 titolone">
+          Tutto quello che serve per <span class="marcato">farsi trovare</span> e riempirsi.
+        </h2>
+        <p class="mt-5 text-fumo text-lg max-w-[44ch]">
+          Puoi prendere una cosa sola o tutto il pacchetto. Di solito si parte
+          dal sito e dalla scheda Google, che sono le due che si vedono subito.
+        </p>
+        <a href="#contatti" class="bottone bottone-secondario mt-7 hidden lg:inline-flex">
+          Non sai da dove cominciare? Chiamaci
+          <span class="freccia" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Lista editoriale numerata: niente card tutte uguali. -->
+      <ol class="border-t-2 border-navy/12">
+        {servizi.map((s, i) => (
+          <li class="rivela border-b-2 border-navy/12 group">
+            <div class="py-6 md:py-7 grid grid-cols-[auto_1fr_auto] gap-4 md:gap-6 items-start transition-colors duration-200 group-hover:bg-white/70 -mx-3 px-3 rounded-lg">
+              <span
+                class="font-display font-extrabold text-[2rem] md:text-[2.6rem] leading-none text-blu/25 group-hover:text-blu transition-colors duration-200 tabular-nums pt-0.5"
+                aria-hidden="true"
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="text-[1.25rem] md:text-[1.5rem] leading-tight">
+                  {s.titolo}
+                </h3>
+                <p class="mt-2 text-[0.9375rem] md:text-base text-fumo max-w-[52ch]">
+                  {s.descrizione}
+                </p>
+              </div>
+              <span
+                class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-sabbia text-navy flex items-center justify-center shrink-0 group-hover:bg-blu group-hover:text-white transition-colors duration-200"
+                aria-hidden="true"
+              >
+                <Icona nome={s.icona} classe="w-5 h-5 md:w-6 md:h-6" />
+              </span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <p class="mt-10 text-center text-lg rivela lg:hidden">
+      Non sai da dove cominciare?{' '}
+      <a href="#contatti" class="text-blu font-semibold underline underline-offset-4 decoration-2">
+        Chiamaci
+      </a>{' '}
+      e ti diciamo noi qual è la cosa più urgente da sistemare.
+    </p>
+  </div>
+</section>

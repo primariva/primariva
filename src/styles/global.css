@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Token del brand Altamarea.
+   Fonte: scheda-stile-altamarea.html — non cambiare questi valori
+   senza aggiornare anche quella.
+   --------------------------------------------------------------- */
+@theme {
+  --color-panna: #f7f5ef;
+  --color-blu: #1d4da0;
+  --color-blu-scuro: #17408a;
+  --color-sabbia: #e7d8bf;
+  --color-navy: #102a4c;
+  --color-fumo: #5b6b80;
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-scheda: 0 1px 3px rgb(16 42 76 / 0.13);
+  --shadow-scheda-alta: 0 14px 34px rgb(16 42 76 / 0.16);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-panna);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    /* Mai sotto i 16px: il visitatore ha spesso più di cinquant'anni. */
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-sabbia);
+    color: var(--color-navy);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  /* Le ancore non devono finire sotto la barra sticky. */
+  section[id] { scroll-margin-top: 4.5rem; }
+
+  :focus-visible {
+    outline: 3px solid var(--color-blu);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .contenitore {
+    width: 100%;
+    max-width: 1160px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .contenitore { padding-inline: 2.5rem; }
+  }
+
+  .occhiello {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-blu);
+  }
+  .occhiello::before {
+    content: "";
+    width: 2rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-blu);
+  }
+  .occhiello-chiaro { color: var(--color-sabbia); }
+  .occhiello-chiaro::before { background: var(--color-sabbia); }
+
+  /* Titoli di sezione: grandi davvero. */
+  .titolone {
+    font-size: clamp(2rem, 6.5vw, 3.4rem);
+    line-height: 1.04;
+  }
+
+  /* Evidenziatore color sabbia dietro una parola chiave. */
+  .marcato {
+    background-image: linear-gradient(
+      to top,
+      var(--color-sabbia) 0%,
+      var(--color-sabbia) 34%,
+      transparent 34%
+    );
+    padding-inline: 0.08em;
+  }
+  .marcato-blu {
+    background-image: linear-gradient(
+      to top,
+      rgb(29 77 160 / 0.35) 0%,
+      rgb(29 77 160 / 0.35) 34%,
+      transparent 34%
+    );
+    padding-inline: 0.08em;
+  }
+
+  /* Parola gigante in contorno, da fondale. */
+  .parola-fondale {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(29 77 160 / 0.16);
+    user-select: none;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Aree toccabili sempre ≥ 44px. */
+  .bottone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.85rem 1.7rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease,
+      border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .bottone-primario {
+    background-color: var(--color-blu);
+    color: #fff;
+    box-shadow: 0 6px 18px rgb(29 77 160 / 0.3);
+  }
+  .bottone-primario:hover {
+    background-color: var(--color-blu-scuro);
+    transform: translateY(-2px);
+  }
+  .bottone-secondario {
+    background-color: transparent;
+    color: var(--color-navy);
+    border: 2px solid rgb(16 42 76 / 0.25);
+  }
+  .bottone-secondario:hover {
+    border-color: var(--color-blu);
+    color: var(--color-blu);
+    transform: translateY(-2px);
+  }
+  .bottone-sabbia {
+    background-color: var(--color-sabbia);
+    color: var(--color-navy);
+  }
+  .bottone-sabbia:hover {
+    background-color: #efe3d0;
+    transform: translateY(-2px);
+  }
+  .bottone:active { transform: translateY(0); }
+
+  /* La freccia dentro i bottoni scivola su hover. */
+  .bottone .freccia { transition: transform 0.2s ease; }
+  .bottone:hover .freccia { transform: translateX(4px); }
+
+  .scheda {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-scheda);
+  }
+
+  /* Nastro scorrevole. Due copie del contenuto, la seconda aria-hidden. */
+  .nastro { overflow: hidden; }
+  .nastro-traccia {
+    display: flex;
+    width: max-content;
+    animation: nastro-scorri 30s linear infinite;
+  }
+  .nastro:hover .nastro-traccia { animation-play-state: paused; }
+  @keyframes nastro-scorri {
+    to { transform: translateX(-50%); }
+  }
+
+  /* Onda che ondeggia piano, per i segni decorativi. */
+  .onda-viva {
+    animation: onda-fluttua 6s ease-in-out infinite alternate;
+  }
+  @keyframes onda-fluttua {
+    from { transform: translateX(0); }
+    to { transform: translateX(-2.5%); }
+  }
+}
+
+/* ---------------------------------------------------------------
+   Comparsa delle sezioni. Una sola volta, mai in loop.
+   Il testo dell'apertura è escluso: deve essere leggibile subito.
+   --------------------------------------------------------------- */
+@layer utilities {
+  .rivela {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform;
+  }
+  .rivela.visibile {
+    opacity: 1;
+    transform: none;
+  }
+
+  .scorri-snap {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .scorri-snap::-webkit-scrollbar { display: none; }
+  .scorri-snap > * { scroll-snap-align: start; }
+}
+
+/* Accessibilità: non è un dettaglio di gusto. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rivela {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .nastro-traccia, .onda-viva { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

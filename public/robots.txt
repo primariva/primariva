@@ -1,0 +1,6 @@
+# Tutti benvenuti, inclusi i crawler degli assistenti AI:
+# vendiamo visibilità sulla ricerca con AI, sarebbe assurdo bloccarli.
+User-agent: *
+Allow: /
+
+Sitemap: https://altamarea.it/sitemap-index.xml

@@ -1,0 +1,91 @@
+---
+import { sito, daCompilare, linkWhatsapp } from '../content/sito';
+
+const anno = new Date().getFullYear();
+const sociPronti = sito.soci.every(
+  (s) => !daCompilare(s.nomeLegale) && !daCompilare(s.piva),
+);
+---
+
+<footer class="bg-navy text-panna/75 pt-14 md:pt-20 pb-8 relative overflow-hidden">
+  <div class="contenitore relative">
+    <!-- Chiusura commerciale: l'ultima cosa che si legge è un invito, non una P.IVA. -->
+    <div class="pb-12 md:pb-16 border-b border-white/12">
+      <h2 class="text-panna text-[clamp(2rem,7vw,4rem)] leading-[1.02] max-w-[18ch]">
+        Parliamone davanti a <span class="marcato-blu">un caffè</span>.
+      </h2>
+      <div class="mt-7 flex flex-col sm:flex-row gap-3">
+        <a href="#contatti" class="bottone bottone-sabbia">
+          Prenota una chiamata
+          <span class="freccia" aria-hidden="true">→</span>
+        </a>
+        {linkWhatsapp && (
+          <a href={linkWhatsapp} target="_blank" rel="noopener" class="bottone border-2 border-white/25 text-panna hover:border-sabbia hover:text-sabbia">
+            Scrivici su WhatsApp
+          </a>
+        )}
+      </div>
+    </div>
+
+    <div class="mt-10 md:flex md:items-start md:justify-between md:gap-10">
+      <div>
+        <span class="font-display font-extrabold text-2xl tracking-[0.06em] text-panna">ALTAMAREA</span>
+        <span class="block text-[0.6875rem] uppercase tracking-[0.16em] text-panna/60 mt-1">
+          agenzia digitale romagnola
+        </span>
+        <p class="mt-4 max-w-[42ch] text-[0.9375rem]">
+          Siti, social e contenuti per le attività della Romagna. Rimini,
+          Forlì-Cesena e Ravenna.
+        </p>
+      </div>
+
+      <nav aria-label="Note legali" class="mt-8 md:mt-0 flex flex-wrap gap-x-6 gap-y-2 text-[0.875rem]">
+        <a href="/privacy" class="underline underline-offset-2 hover:text-panna py-3 -my-1 inline-block">Informativa privacy</a>
+        <a href="/cookie-policy" class="underline underline-offset-2 hover:text-panna py-3 -my-1 inline-block">Cookie policy</a>
+        {!daCompilare(sito.email) && (
+          <a href={`mailto:${sito.email}`} class="underline underline-offset-2 hover:text-panna py-3 -my-1 inline-block">{sito.email}</a>
+        )}
+        {!daCompilare(sito.instagram) && (
+          <a href={sito.instagram} target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-panna py-3 -my-1 inline-block">Instagram</a>
+        )}
+        {!daCompilare(sito.facebook) && (
+          <a href={sito.facebook} target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-panna py-3 -my-1 inline-block">Facebook</a>
+        )}
+      </nav>
+    </div>
+
+    <!--
+      ⚠️ Altamarea è un marchio, non una società: dietro ci sono due partite
+      IVA individuali distinte. Non scrivere mai "S.r.l." né un simbolo di
+      copyright con una ragione sociale. Formulazione da far validare al
+      commercialista prima della pubblicazione.
+    -->
+    <p class="mt-10 pt-6 border-t border-white/12 text-[0.8125rem] leading-relaxed">
+      {sociPronti ? (
+        <>
+          Altamarea è il marchio con cui operano {sito.soci[0]?.nomeLegale},
+          P.IVA {sito.soci[0]?.piva}, e {sito.soci[1]?.nomeLegale},
+          P.IVA {sito.soci[1]?.piva}.
+        </>
+      ) : (
+        <span class="text-sabbia">
+          ⚠️ Da compilare prima della pubblicazione: nomi e partite IVA dei due
+          soci in <code>src/content/sito.ts</code>. La formulazione corretta è
+          «Altamarea è il marchio con cui operano […], P.IVA […], e […], P.IVA […]».
+        </span>
+      )}
+    </p>
+
+    <p class="mt-5 text-[0.75rem] text-panna/45">
+      Altamarea · {anno} · Sito realizzato internamente. Nessun cookie di
+      profilazione, nessun tracciamento.
+    </p>
+  </div>
+
+  <!-- Marchio gigante che chiude la pagina, mezzo fuori dal bordo. -->
+  <div class="mt-10 -mb-[2vw] select-none" aria-hidden="true">
+    <span class="parola-fondale block text-center text-[clamp(3.4rem,12.5vw,10.5rem)] [-webkit-text-stroke:1.5px_rgb(247_245_239/0.22)]">
+      ALTAMAREA
+    </span>
+  </div>
+</footer>

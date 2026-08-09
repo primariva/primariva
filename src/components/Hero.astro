@@ -1,0 +1,66 @@
+---
+import Logo from './Logo.astro';
+import { sito, linkWhatsapp } from '../content/sito';
+---
+
+<section id="top" class="relative overflow-hidden pt-7 md:pt-10">
+  <div class="contenitore relative">
+    <a href="#top" class="inline-block" aria-label="Altamarea">
+      <Logo />
+    </a>
+
+    <div class="mt-12 md:mt-16 relative z-10">
+      <p class="occhiello">{sito.areaServita.join(' · ')}</p>
+
+      <!--
+        Il titolo non ha animazione di comparsa: deve essere leggibile al
+        primo frame utile. L'animazione riguarda solo ciò che sta sotto.
+      -->
+      <h1 class="mt-5 text-[clamp(2.7rem,10.5vw,5.6rem)] leading-[0.98] max-w-[14ch]">
+        Del tuo locale <span class="marcato">online</span> ce ne occupiamo noi.
+      </h1>
+    </div>
+
+    <div class="mt-7 md:mt-9 md:flex md:items-end md:justify-between md:gap-10 relative z-10">
+      <p class="text-lg md:text-[1.35rem] leading-snug text-fumo max-w-[38ch]">
+        Siti, social e contenuti girati <em class="not-italic font-semibold text-navy">dentro il tuo locale</em>.
+        Per bagni, ristoranti, bar e hotel della Romagna.
+      </p>
+
+      <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-3 shrink-0">
+        <a href="#contatti" class="bottone bottone-primario">
+          Prenota una chiamata
+          <span class="freccia" aria-hidden="true">→</span>
+        </a>
+        {linkWhatsapp ? (
+          <a href={linkWhatsapp} class="bottone bottone-secondario" target="_blank" rel="noopener">
+            Scrivici su WhatsApp
+          </a>
+        ) : (
+          <a href="#contatti" class="bottone bottone-secondario">Scrivici su WhatsApp</a>
+        )}
+      </div>
+    </div>
+
+    <p class="mt-9 text-[0.9375rem] text-fumo max-w-[52ch] border-l-4 border-sabbia pl-4 relative z-10">
+      Siamo di qui. Veniamo a trovarti, guardiamo come stai messo online e
+      ti diciamo cosa faremmo. Senza impegno e senza farti perdere un’ora.
+    </p>
+  </div>
+
+  <!-- La marea che sale: onde larghe quanto la pagina, in movimento lento. -->
+  <div class="relative mt-10 md:mt-14 h-[110px] md:h-[150px]" aria-hidden="true">
+    <svg
+      class="onda-viva absolute bottom-[52px] md:bottom-[74px] left-0 w-[210%] h-[46px] md:h-[62px] text-sabbia"
+      viewBox="0 0 1440 64" preserveAspectRatio="none" fill="none"
+    >
+      <path d="M0 40c60 0 60-24 120-24s60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    <svg
+      class="onda-viva absolute bottom-0 left-0 w-[210%] h-[72px] md:h-[96px] text-blu [animation-duration:9s]"
+      viewBox="0 0 1440 64" preserveAspectRatio="none" fill="none"
+    >
+      <path d="M0 40c60 0 60-24 120-24s60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24 60-24 120-24 60 24 120 24" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>

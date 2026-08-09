@@ -1,0 +1,88 @@
+---
+import '@fontsource/archivo/700.css';
+import '@fontsource/archivo/800.css';
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/600.css';
+import '../styles/global.css';
+import { sito } from '../content/sito';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Le pagine legali non vanno indicizzate come contenuto principale. */
+  noindex?: boolean;
+  /** JSON-LD già serializzato. */
+  datiStrutturati?: string;
+}
+
+const {
+  title = sito.title,
+  description = sito.description,
+  noindex = false,
+  datiStrutturati,
+} = Astro.props;
+
+const canonico = new URL(Astro.url.pathname, Astro.site ?? sito.dominio).href;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonico} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content={sito.nome} />
+    <meta property="og:title" content={sito.ogTitle} />
+    <meta property="og:description" content={sito.ogDescription} />
+    <meta property="og:url" content={canonico} />
+    <meta property="og:image" content={new URL('/og.png', sito.dominio).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#F7F5EF" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {datiStrutturati && <script is:inline type="application/ld+json" set:html={datiStrutturati} />}
+  </head>
+
+  <body>
+    <a
+      href="#contenuto"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-[60] focus:top-3 focus:left-3 focus:bg-blu focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+    >
+      Salta al contenuto
+    </a>
+
+    <main id="contenuto">
+      <slot />
+    </main>
+
+    <script>
+      /* Comparsa delle sezioni: una sola volta, mai in loop. */
+      const elementi = document.querySelectorAll('.rivela');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && elementi.length > 0) {
+        const osservatore = new IntersectionObserver(
+          (voci, obs) => {
+            voci.forEach((v) => {
+              if (!v.isIntersecting) return;
+              v.target.classList.add('visibile');
+              obs.unobserve(v.target);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+        elementi.forEach((el) => osservatore.observe(el));
+      } else {
+        elementi.forEach((el) => el.classList.add('visibile'));
+      }
+    </script>
+  </body>
+</html>

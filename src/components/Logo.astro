@@ -1,0 +1,47 @@
+---
+/**
+ * ⚠️ SEGNAPOSTO. Il simbolo qui sotto (orizzonte + onda) serve solo a
+ * tenere le proporzioni finché non esiste il logo definitivo.
+ * Sostituire l'SVG con quello prodotto dal prompt in
+ * 02-brand/prompt-logo-altamarea.md, poi cancellare questo commento.
+ */
+interface Props {
+  /** 'scuro' su fondo chiaro, 'chiaro' su navy o blu. */
+  variante?: 'scuro' | 'chiaro';
+  /** Nasconde il descrittore quando lo spazio è poco. */
+  conDescrittore?: boolean;
+  classe?: string;
+}
+
+const { variante = 'scuro', conDescrittore = true, classe = '' } = Astro.props;
+
+const coloreTesto = variante === 'scuro' ? 'text-navy' : 'text-white';
+const coloreOnda = variante === 'scuro' ? '#1D4DA0' : '#F7F5EF';
+const coloreLinea = variante === 'scuro' ? '#E7D8BF' : '#E7D8BF';
+---
+
+<span class={`inline-flex items-center gap-2.5 ${coloreTesto} ${classe}`}>
+  <svg
+    class="w-9 h-9 shrink-0"
+    viewBox="0 0 44 44"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M4 29c4.5 0 4.5-6 9-6s4.5 6 9 6 4.5-6 9-6 4.5 6 9 6"
+      stroke={coloreOnda}
+      stroke-width="3.4"
+      stroke-linecap="round"
+    />
+    <path d="M8 15h28" stroke={coloreLinea} stroke-width="3.4" stroke-linecap="round" />
+  </svg>
+  <span class="leading-none">
+    <span class="block font-display font-bold text-lg tracking-[0.07em]">ALTAMAREA</span>
+    {conDescrittore && (
+      <span class="block text-[0.625rem] uppercase tracking-[0.14em] opacity-75 mt-1">
+        agenzia digitale romagnola
+      </span>
+    )}
+  </span>
+</span>

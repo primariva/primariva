@@ -1,0 +1,143 @@
+---
+import Logo from './Logo.astro';
+
+const voci = [
+  { href: '#servizi', testo: 'Servizi' },
+  { href: '#lavori', testo: 'Lavori' },
+  { href: '#chi-siamo', testo: 'Chi siamo' },
+  { href: '#contatti', testo: 'Contatti' },
+];
+---
+
+<header
+  id="barra"
+  class="fixed top-0 inset-x-0 z-50 -translate-y-full opacity-0 transition-[transform,opacity] duration-300 bg-panna/95 backdrop-blur-sm border-b border-navy/10"
+  data-visibile="false"
+>
+  <div class="contenitore flex items-center justify-between h-16 gap-4">
+    <a href="#top" class="shrink-0" aria-label="Altamarea, torna all'inizio">
+      <Logo conDescrittore={false} />
+    </a>
+
+    <nav aria-label="Sezioni del sito" class="hidden md:block">
+      <ul class="flex items-center gap-7">
+        {voci.map((v) => (
+          <li>
+            <a
+              href={v.href}
+              data-voce
+              class="text-[0.9375rem] font-medium text-fumo hover:text-blu transition-colors aria-[current=true]:text-blu aria-[current=true]:font-semibold"
+            >
+              {v.testo}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="#contatti" class="bottone bottone-primario !min-h-11 !px-4 !text-[0.9375rem]">
+        Prenota una chiamata
+      </a>
+      <button
+        type="button"
+        id="apri-menu"
+        class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border-2 border-navy/20"
+        aria-label="Apri il menu"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile -->
+  <div
+    id="menu-mobile"
+    class="md:hidden hidden border-t border-navy/10 bg-panna"
+  >
+    <ul class="contenitore py-3">
+      {voci.map((v) => (
+        <li>
+          <a
+            href={v.href}
+            data-chiudi-menu
+            class="block py-3 text-lg font-medium border-b border-navy/8 last:border-0"
+          >
+            {v.testo}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const barra = document.getElementById('barra');
+  const bottoneMenu = document.getElementById('apri-menu');
+  const menu = document.getElementById('menu-mobile');
+
+  /* La barra compare solo dopo il primo scroll, così l'apertura resta pulita. */
+  if (barra) {
+    const aggiornaBarra = () => {
+      const mostra = window.scrollY > 260;
+      barra.classList.toggle('-translate-y-full', !mostra);
+      barra.classList.toggle('opacity-0', !mostra);
+      if (!mostra) chiudiMenu();
+    };
+    aggiornaBarra();
+    window.addEventListener('scroll', aggiornaBarra, { passive: true });
+  }
+
+  function chiudiMenu(): void {
+    if (!menu || !bottoneMenu) return;
+    menu.classList.add('hidden');
+    bottoneMenu.setAttribute('aria-expanded', 'false');
+    bottoneMenu.setAttribute('aria-label', 'Apri il menu');
+    document.body.style.overflow = '';
+  }
+
+  bottoneMenu?.addEventListener('click', () => {
+    if (!menu) return;
+    const aperto = !menu.classList.contains('hidden');
+    if (aperto) {
+      chiudiMenu();
+    } else {
+      menu.classList.remove('hidden');
+      bottoneMenu.setAttribute('aria-expanded', 'true');
+      bottoneMenu.setAttribute('aria-label', 'Chiudi il menu');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  document.querySelectorAll('[data-chiudi-menu]').forEach((a) =>
+    a.addEventListener('click', chiudiMenu),
+  );
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') chiudiMenu();
+  });
+
+  /* Evidenzia la sezione in cui ci si trova. */
+  const voci = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-voce]'));
+  const sezioni = voci
+    .map((v) => document.querySelector(v.hash))
+    .filter((s): s is Element => s !== null);
+
+  if (sezioni.length > 0) {
+    const osservatore = new IntersectionObserver(
+      (voci_) => {
+        voci_.forEach((v) => {
+          if (!v.isIntersecting) return;
+          const id = `#${v.target.id}`;
+          voci.forEach((a) => a.setAttribute('aria-current', String(a.hash === id)));
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    sezioni.forEach((s) => osservatore.observe(s));
+  }
+</script>

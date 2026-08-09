@@ -1,0 +1,43 @@
+---
+/**
+ * Nastro scorrevole con i tipi di locale che seguiamo.
+ * Due copie della sequenza: la seconda è solo per la continuità visiva.
+ */
+interface Props {
+  voci?: string[];
+  /** 'blu' tra le sezioni chiare, 'sabbia' sul navy. */
+  variante?: 'blu' | 'sabbia';
+}
+
+const {
+  voci = ['Bagni al mare', 'Ristoranti', 'Bar', 'Hotel', 'Terme', 'Discoteche', 'Agriturismi'],
+  variante = 'blu',
+} = Astro.props;
+
+const classi =
+  variante === 'blu'
+    ? 'bg-blu text-panna'
+    : 'bg-sabbia text-navy';
+---
+
+<div class={`nastro py-3.5 md:py-4 ${classi}`} role="presentation">
+  <div class="nastro-traccia">
+    {[0, 1].map((copia) => (
+      <ul
+        class="flex items-center shrink-0"
+        aria-hidden={copia === 1 ? 'true' : undefined}
+      >
+        {voci.map((v) => (
+          <li class="flex items-center">
+            <span class="font-display font-bold uppercase tracking-[0.14em] text-[0.8125rem] md:text-[0.9375rem] whitespace-nowrap px-5 md:px-7">
+              {v}
+            </span>
+            <svg class="w-6 h-3 opacity-60 shrink-0" viewBox="0 0 24 12" fill="none" aria-hidden="true">
+              <path d="M1 8c2.75 0 2.75-4 5.5-4S9.25 8 12 8s2.75-4 5.5-4S20.25 8 23 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,256 @@
+---
+import { sito, daCompilare, linkWhatsapp } from '../content/sito';
+
+const emailPronta = !daCompilare(sito.email);
+const telefonoPronto = !daCompilare(sito.telefonoVisibile);
+const formPronto = !daCompilare(sito.chiaveForm);
+---
+
+<section id="contatti" class="py-16 md:py-24 relative overflow-hidden">
+  <span class="parola-fondale absolute -bottom-4 right-0 text-[clamp(4.5rem,14vw,11rem)]" aria-hidden="true">
+    PARLIAMONE
+  </span>
+
+  <div class="contenitore relative">
+    <div class="rivela max-w-[58ch]">
+      <p class="occhiello">Parliamone</p>
+      <h2 class="mt-4 titolone">
+        Raccontaci com’è messo <span class="marcato">il tuo locale</span>.
+      </h2>
+      <p class="mt-5 text-fumo text-lg max-w-[48ch]">
+        Non serve che tu sappia cosa ti serve. Chiamaci, ci facciamo un’idea
+        insieme in dieci minuti.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-12">
+      <!-- I tre canali, in ordine di attrito crescente. -->
+      <ul class="space-y-3.5 rivela">
+        <li>
+          <a
+            href={linkWhatsapp ?? '#modulo'}
+            {...(linkWhatsapp ? { target: '_blank', rel: 'noopener' } : {})}
+            class="scheda flex items-start gap-4 p-5 md:p-6 hover:shadow-[var(--shadow-scheda-alta)] hover:-translate-y-0.5 transition-all duration-200 border-l-4 border-l-blu"
+          >
+            <span class="w-12 h-12 rounded-full bg-blu text-white flex items-center justify-center shrink-0" aria-hidden="true">
+              <svg class="w-5.5 h-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z" />
+              </svg>
+            </span>
+            <span>
+              <span class="block font-display font-bold text-[1.0625rem]">WhatsApp</span>
+              <span class="block text-[0.9375rem] text-fumo mt-1">
+                Il modo più veloce. Scrivi anche solo «ciao, sono il bagno…».
+              </span>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href={telefonoPronto ? `tel:${sito.telefonoLink}` : '#modulo'}
+            class="scheda flex items-start gap-4 p-5 md:p-6 hover:shadow-[var(--shadow-scheda-alta)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <span class="w-12 h-12 rounded-full bg-sabbia flex items-center justify-center shrink-0" aria-hidden="true">
+              <svg class="w-5.5 h-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6.5 3h3l1.5 4-2 1.4a12 12 0 0 0 5.6 5.6L16 12l4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 4 5.6 1.5 1.5 0 0 1 5.5 4z" />
+              </svg>
+            </span>
+            <span>
+              <span class="block font-display font-bold text-[1.0625rem]">Telefono</span>
+              <span class="block text-[0.9375rem] text-fumo mt-1">
+                {telefonoPronto ? sito.telefonoVisibile : 'Numero da inserire'}
+              </span>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href={emailPronta ? `mailto:${sito.email}` : '#modulo'}
+            class="scheda flex items-start gap-4 p-5 md:p-6 hover:shadow-[var(--shadow-scheda-alta)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <span class="w-12 h-12 rounded-full bg-sabbia flex items-center justify-center shrink-0" aria-hidden="true">
+              <svg class="w-5.5 h-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3.5 6.5 8.5 6 8.5-6" />
+              </svg>
+            </span>
+            <span>
+              <span class="block font-display font-bold text-[1.0625rem]">Email</span>
+              <span class="block text-[0.9375rem] text-fumo mt-1">
+                {emailPronta ? sito.email : 'Indirizzo da inserire'}
+              </span>
+            </span>
+          </a>
+        </li>
+
+        <li class="pt-2">
+          <p class="text-[0.9375rem] text-fumo border-l-4 border-sabbia pl-4">
+            Rispondiamo entro 24 ore. E se sei in zona, veniamo a trovarti.
+          </p>
+        </li>
+      </ul>
+
+      <!-- Il modulo: quattro campi e non uno di più. -->
+      <form id="modulo" class="scheda p-6 md:p-8 rivela border-t-4 border-t-blu" novalidate>
+        {formPronto && <input type="hidden" name="access_key" value={sito.chiaveForm} />}
+        <input type="hidden" name="subject" value="Nuovo contatto dal sito Altamarea" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="space-y-4">
+          <div>
+            <label for="nome" class="block font-semibold mb-1.5">Come ti chiami</label>
+            <input
+              id="nome" name="nome" type="text" required autocomplete="name"
+              placeholder="Mario Rossi"
+              class="w-full min-h-12 px-4 rounded-xl border-2 border-navy/15 bg-panna focus:border-blu focus:outline-none"
+            />
+            <p class="errore hidden mt-1.5 text-[0.875rem] text-[#b03030]">Scrivici come ti chiami.</p>
+          </div>
+
+          <div>
+            <label for="attivita" class="block font-semibold mb-1.5">Il nome del locale</label>
+            <input
+              id="attivita" name="attivita" type="text" required autocomplete="organization"
+              placeholder="Bagno 42, Osteria da…"
+              class="w-full min-h-12 px-4 rounded-xl border-2 border-navy/15 bg-panna focus:border-blu focus:outline-none"
+            />
+            <p class="errore hidden mt-1.5 text-[0.875rem] text-[#b03030]">Dicci il nome del locale.</p>
+          </div>
+
+          <div>
+            <label for="contatto" class="block font-semibold mb-1.5">Telefono o email</label>
+            <input
+              id="contatto" name="contatto" type="text" required
+              placeholder="Come preferisci che ti rispondiamo"
+              class="w-full min-h-12 px-4 rounded-xl border-2 border-navy/15 bg-panna focus:border-blu focus:outline-none"
+            />
+            <p class="errore hidden mt-1.5 text-[0.875rem] text-[#b03030]">
+              Lasciaci un telefono o un’email, altrimenti non possiamo risponderti.
+            </p>
+          </div>
+
+          <div>
+            <label for="messaggio" class="block font-semibold mb-1.5">Cosa ti serve</label>
+            <textarea
+              id="messaggio" name="messaggio" required rows="4"
+              placeholder="Anche solo due righe"
+              class="w-full py-3 px-4 rounded-xl border-2 border-navy/15 bg-panna focus:border-blu focus:outline-none resize-y"
+            ></textarea>
+            <p class="errore hidden mt-1.5 text-[0.875rem] text-[#b03030]">Scrivi due righe su cosa ti serve.</p>
+          </div>
+
+          <!-- Consenso: casella mai pre-spuntata, invio bloccato senza. -->
+          <div>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input
+                id="consenso" name="consenso" type="checkbox" required
+                class="mt-1 w-5 h-5 shrink-0 accent-[#1D4DA0]"
+              />
+              <span class="text-[0.9375rem] text-fumo">
+                Ho letto l’<a href="/privacy" class="text-blu underline underline-offset-2">informativa privacy</a>
+                e acconsento al trattamento dei miei dati per ricevere una risposta a questa richiesta.
+              </span>
+            </label>
+            <p class="errore hidden mt-1.5 text-[0.875rem] text-[#b03030]">
+              Serve la tua conferma per poterti rispondere.
+            </p>
+          </div>
+        </div>
+
+        <button type="submit" id="invia" class="bottone bottone-primario w-full mt-6">
+          Mandaci il messaggio
+          <span class="freccia" aria-hidden="true">→</span>
+        </button>
+
+        <p id="esito" role="status" aria-live="polite" class="hidden mt-4 p-4 rounded-xl bg-sabbia text-[0.9375rem]"></p>
+
+        {!formPronto && (
+          <p class="mt-4 text-[0.8125rem] text-[#b03030]">
+            ⚠️ Chiave del modulo non ancora configurata: compila
+            <code class="mx-1">chiaveForm</code> in <code>src/content/sito.ts</code>.
+          </p>
+        )}
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const modulo = document.getElementById('modulo') as HTMLFormElement | null;
+  const esito = document.getElementById('esito');
+  const bottone = document.getElementById('invia') as HTMLButtonElement | null;
+
+  function mostraErrore(campo: Element, mostra: boolean): void {
+    const contenitore = campo.closest('div');
+    const messaggio = contenitore?.querySelector('.errore');
+    messaggio?.classList.toggle('hidden', !mostra);
+    if (campo instanceof HTMLInputElement || campo instanceof HTMLTextAreaElement) {
+      campo.setAttribute('aria-invalid', String(mostra));
+    }
+  }
+
+  function contattoValido(valore: string): boolean {
+    const v = valore.trim();
+    const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    const telefono = /^[+\d][\d\s./-]{6,}$/.test(v);
+    return email || telefono;
+  }
+
+  modulo?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!esito || !bottone) return;
+
+    const dati = new FormData(modulo);
+    let valido = true;
+
+    for (const id of ['nome', 'attivita', 'messaggio']) {
+      const campo = modulo.querySelector(`#${id}`);
+      if (!campo) continue;
+      const vuoto = String(dati.get(id) ?? '').trim().length === 0;
+      mostraErrore(campo, vuoto);
+      if (vuoto) valido = false;
+    }
+
+    const contatto = modulo.querySelector('#contatto');
+    if (contatto) {
+      const ok = contattoValido(String(dati.get('contatto') ?? ''));
+      mostraErrore(contatto, !ok);
+      if (!ok) valido = false;
+    }
+
+    const consenso = modulo.querySelector('#consenso') as HTMLInputElement | null;
+    if (consenso) {
+      mostraErrore(consenso, !consenso.checked);
+      if (!consenso.checked) valido = false;
+    }
+
+    if (!valido) {
+      modulo.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      return;
+    }
+
+    bottone.disabled = true;
+    bottone.textContent = 'Invio in corso…';
+    esito.classList.add('hidden');
+
+    try {
+      const risposta = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: dati,
+      });
+      if (!risposta.ok) throw new Error(String(risposta.status));
+      modulo.reset();
+      esito.textContent = 'Ricevuto. Ti rispondiamo entro 24 ore, di solito molto prima.';
+    } catch {
+      esito.textContent =
+        'Qualcosa non ha funzionato nell’invio. Scrivici su WhatsApp o per email, ti rispondiamo lo stesso.';
+    } finally {
+      esito.classList.remove('hidden');
+      bottone.disabled = false;
+      bottone.textContent = 'Mandaci il messaggio';
+    }
+  });
+</script>

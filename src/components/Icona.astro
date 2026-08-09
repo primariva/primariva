@@ -1,0 +1,60 @@
+---
+import type { NomeIcona } from '../content/tipi';
+
+interface Props {
+  nome: NomeIcona;
+  classe?: string;
+}
+
+const { nome, classe = 'w-6 h-6' } = Astro.props;
+---
+
+<svg
+  class={classe}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {nome === 'schermo' && (
+    <>
+      <rect x="2.5" y="4" width="19" height="13" rx="2" />
+      <path d="M8.5 21h7M12 17v4" />
+    </>
+  )}
+  {nome === 'calendario' && (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4M8 14h3" />
+    </>
+  )}
+  {nome === 'macchina-foto' && (
+    <>
+      <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.6l1.3-2h7.2l1.3 2h2.6A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
+      <circle cx="12" cy="13" r="3.4" />
+    </>
+  )}
+  {nome === 'segnaposto' && (
+    <>
+      <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" />
+      <circle cx="12" cy="10" r="2.6" />
+    </>
+  )}
+  {nome === 'ricerca' && (
+    <>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="M20 20l-4.7-4.7" />
+      <path d="M8 10.5h5M10.5 8v5" />
+    </>
+  )}
+  {nome === 'megafono' && (
+    <>
+      <path d="M4 10v4a1 1 0 0 0 1 1h2.5L15 20V4L7.5 9H5a1 1 0 0 0-1 1z" />
+      <path d="M18.5 8.5a5 5 0 0 1 0 7" />
+    </>
+  )}
+</svg>

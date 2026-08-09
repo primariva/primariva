@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Nastro from '../components/Nastro.astro';
+import Servizi from '../components/Servizi.astro';
+import Lavori from '../components/Lavori.astro';
+import ChiSiamo from '../components/ChiSiamo.astro';
+import Contatti from '../components/Contatti.astro';
+import Footer from '../components/Footer.astro';
+import { sito, daCompilare } from '../content/sito';
+import { servizi } from '../content/servizi';
+
+/**
+ * Dati strutturati. Il nostro sito deve essere la dimostrazione del
+ * servizio "ti trovano anche con l'AI": se li vendiamo, li applichiamo.
+ */
+const datiStrutturati = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${sito.dominio}/#attivita`,
+      name: sito.nome,
+      description: sito.description,
+      url: sito.dominio,
+      slogan: 'Del tuo locale online ce ne occupiamo noi',
+      inLanguage: 'it-IT',
+      areaServed: sito.areaServita.map((n) => ({ '@type': 'AdministrativeArea', name: n })),
+      address: { '@type': 'PostalAddress', addressRegion: 'Emilia-Romagna', addressCountry: 'IT' },
+      ...(daCompilare(sito.email) ? {} : { email: sito.email }),
+      ...(daCompilare(sito.telefonoVisibile) ? {} : { telephone: sito.telefonoVisibile }),
+      knowsLanguage: 'it',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servizi',
+        itemListElement: servizi.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: s.titolo, description: s.descrizione },
+        })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${sito.dominio}/#sito`,
+      url: sito.dominio,
+      name: sito.nome,
+      inLanguage: 'it-IT',
+      publisher: { '@id': `${sito.dominio}/#attivita` },
+    },
+  ],
+});
+---
+
+<Base datiStrutturati={datiStrutturati}>
+  <Nav />
+  <Hero />
+  <Nastro variante="blu" />
+  <Servizi />
+  <Lavori />
+  <Nastro
+    variante="sabbia"
+    voci={['Siamo di qui', 'Veniamo a trovarti', 'Capiamo la stagione', 'Contenuti girati sul posto', 'Niente numeri inventati']}
+  />
+  <ChiSiamo />
+  <Contatti />
+  <Footer />
+</Base>

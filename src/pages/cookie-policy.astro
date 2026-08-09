@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<Base
+  title="Cookie policy — Altamarea"
+  description="Questo sito non usa cookie di profilazione né strumenti di tracciamento."
+  noindex
+>
+  <div class="contenitore py-10">
+    <a href="/" aria-label="Torna alla home"><Logo /></a>
+  </div>
+
+  <article class="contenitore pb-16 max-w-[68ch]">
+    <h1 class="text-[2rem] md:text-[2.5rem]">Cookie policy</h1>
+    <p class="mt-3 text-fumo text-[0.9375rem]">Ultimo aggiornamento: [data].</p>
+
+    <h2 class="mt-8 text-2xl">In breve</h2>
+    <p class="mt-3">
+      Questo sito <strong>non usa cookie di profilazione</strong>, non ha il
+      pixel di Meta, non ha Google Analytics e non installa strumenti di
+      statistica di terze parti. Non ti seguiamo e non passiamo i tuoi dati a
+      circuiti pubblicitari.
+    </p>
+    <p class="mt-3">
+      È il motivo per cui non trovi un banner di consenso: il banner serve a
+      raccogliere il consenso per i cookie non tecnici, e qui non ce ne sono.
+    </p>
+
+    <h2 class="mt-8 text-2xl">Cosa usiamo davvero</h2>
+    <p class="mt-3">
+      Solo elementi tecnici necessari a farti vedere la pagina: i caratteri
+      tipografici sono ospitati direttamente sul nostro dominio, quindi il tuo
+      indirizzo IP non viene comunicato a servizi esterni per caricarli. Quando
+      invii il modulo di contatto, i dati passano al servizio che ci recapita il
+      messaggio, come spiegato nell’
+      <a href="/privacy" class="text-blu underline underline-offset-2">informativa privacy</a>.
+    </p>
+
+    <h2 class="mt-8 text-2xl">Se un giorno cambierà</h2>
+    <p class="mt-3">
+      Se in futuro attiveremo strumenti di statistica o pubblicitari,
+      comparirà un banner conforme alle Linee guida del Garante del 10 giugno
+      2021: con il pulsante di rifiuto visibile quanto quello di accettazione,
+      nessun cookie non tecnico installato prima della tua scelta, e la
+      possibilità di cambiare idea in qualsiasi momento. Questa pagina verrà
+      aggiornata prima che accada.
+    </p>
+
+    <p class="mt-10">
+      <a href="/" class="text-blu font-semibold underline underline-offset-4">← Torna alla home</a>
+    </p>
+  </article>
+
+  <Footer />
+</Base>
