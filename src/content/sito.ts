@@ -5,11 +5,13 @@
  * pubblicazione. Finché contengono il segnaposto, il sito mostra un
  * avviso in fase di sviluppo e i link non vengono resi cliccabili.
  */
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const DA_COMPILARE = '[da compilare]' as const;
 
 export const sito = {
-  nome: 'Altamarea',
+  nome: 'Primariva',
   descrittore: 'agenzia digitale romagnola',
   dominio: 'https://altamarea.it',
 
@@ -19,6 +21,7 @@ export const sito = {
   ogTitle: 'Del tuo locale online ce ne occupiamo noi',
   ogDescription:
     'Agenzia digitale romagnola. Siti, social e contenuti per le attività della costa e dell’entroterra.',
+  email: 'primariva0@gmail.com',
 
   /** Numero in formato internazionale senza segni, per il link wa.me. */
   whatsapp: DA_COMPILARE as string,
@@ -26,13 +29,12 @@ export const sito = {
   telefonoVisibile: DA_COMPILARE as string,
   /** Come lo mette il link tel:. */
   telefonoLink: DA_COMPILARE as string,
-  email: DA_COMPILARE as string,
 
   instagram: DA_COMPILARE as string,
   facebook: DA_COMPILARE as string,
 
   /** Chiave pubblica Web3Forms. Si ottiene gratis su web3forms.com. */
-  chiaveForm: DA_COMPILARE as string,
+  chiaveForm: process.env.FORM_API_KEY
 
   /**
    * Footer. Altamarea è un marchio, non una società: dietro ci sono due
