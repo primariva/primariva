@@ -29,7 +29,7 @@ const sociPronti = sito.soci.every(
 
     <div class="mt-10 md:flex md:items-start md:justify-between md:gap-10">
       <div>
-        <span class="font-display font-extrabold text-2xl tracking-[0.06em] text-panna">ALTAMAREA</span>
+        <span class="font-display font-extrabold text-2xl tracking-[0.06em] text-panna">Primariva</span>
         <span class="block text-[0.6875rem] uppercase tracking-[0.16em] text-panna/60 mt-1">
           agenzia digitale romagnola
         </span>
@@ -55,7 +55,7 @@ const sociPronti = sito.soci.every(
     </div>
 
     <!--
-      ⚠️ Altamarea è un marchio, non una società: dietro ci sono due partite
+      ⚠️ Primariva è un marchio, non una società: dietro ci sono due partite
       IVA individuali distinte. Non scrivere mai "S.r.l." né un simbolo di
       copyright con una ragione sociale. Formulazione da far validare al
       commercialista prima della pubblicazione.
@@ -63,7 +63,7 @@ const sociPronti = sito.soci.every(
     <p class="mt-10 pt-6 border-t border-white/12 text-[0.8125rem] leading-relaxed">
       {sociPronti ? (
         <>
-          Altamarea è il marchio con cui operano {sito.soci[0]?.nomeLegale},
+          Primariva è il marchio con cui operano {sito.soci[0]?.nomeLegale},
           P.IVA {sito.soci[0]?.piva}, e {sito.soci[1]?.nomeLegale},
           P.IVA {sito.soci[1]?.piva}.
         </>
@@ -71,13 +71,13 @@ const sociPronti = sito.soci.every(
         <span class="text-sabbia">
           ⚠️ Da compilare prima della pubblicazione: nomi e partite IVA dei due
           soci in <code>src/content/sito.ts</code>. La formulazione corretta è
-          «Altamarea è il marchio con cui operano […], P.IVA […], e […], P.IVA […]».
+          «Primariva è il marchio con cui operano […], P.IVA […], e […], P.IVA […]».
         </span>
       )}
     </p>
 
     <p class="mt-5 text-[0.75rem] text-panna/45">
-      Altamarea · {anno} · Sito realizzato internamente. Nessun cookie di
+      Primariva · {anno} · Sito realizzato internamente. Nessun cookie di
       profilazione, nessun tracciamento.
     </p>
   </div>
@@ -85,7 +85,7 @@ const sociPronti = sito.soci.every(
   <!-- Marchio gigante che chiude la pagina, mezzo fuori dal bordo. -->
   <div class="mt-10 -mb-[2vw] select-none" aria-hidden="true">
     <span class="parola-fondale block text-center text-[clamp(3.4rem,12.5vw,10.5rem)] [-webkit-text-stroke:1.5px_rgb(247_245_239/0.22)]">
-      ALTAMAREA
+      PRIMARIVA
     </span>
   </div>
 </footer>

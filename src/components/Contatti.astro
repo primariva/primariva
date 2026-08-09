@@ -7,10 +7,6 @@ const formPronto = !daCompilare(sito.chiaveForm);
 ---
 
 <section id="contatti" class="py-16 md:py-24 relative overflow-hidden">
-  <span class="parola-fondale absolute -bottom-4 right-0 text-[clamp(4.5rem,14vw,11rem)]" aria-hidden="true">
-    PARLIAMONE
-  </span>
-
   <div class="contenitore relative">
     <div class="rivela max-w-[58ch]">
       <p class="occhiello">Parliamone</p>
@@ -95,7 +91,7 @@ const formPronto = !daCompilare(sito.chiaveForm);
       <!-- Il modulo: quattro campi e non uno di più. -->
       <form id="modulo" class="scheda p-6 md:p-8 rivela border-t-4 border-t-blu" novalidate>
         {formPronto && <input type="hidden" name="access_key" value={sito.chiaveForm} />}
-        <input type="hidden" name="subject" value="Nuovo contatto dal sito Altamarea" />
+        <input type="hidden" name="subject" value="Nuovo contatto dal sito Primariva" />
         <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
         <div class="space-y-4">
