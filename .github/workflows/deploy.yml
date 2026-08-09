@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Check API key
+        env:
+          PUBLIC_FORM_API_KEY: ${{ secrets.PUBLIC_FORM_API_KEY }}
         run: |
           if [ -z "$PUBLIC_FORM_API_KEY" ]; then
             echo "❌ PUBLIC_FORM_API_KEY IS EMPTY"
