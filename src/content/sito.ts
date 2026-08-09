@@ -31,7 +31,7 @@ export const sito = {
   facebook: DA_COMPILARE as string,
 
   /** Chiave pubblica Web3Forms. Si ottiene gratis su web3forms.com. */
-  chiaveForm: process.env.FORM_API_KEY,
+  chiaveForm: import.meta.env.FORM_API_KEY,
 
   /**
    * Footer. Altamarea è un marchio, non una società: dietro ci sono due
